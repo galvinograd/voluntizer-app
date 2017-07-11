@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "Voluntizer",
+    "version": "1.0.0",
+    "slug": "voluntizer",
+    "sdkVersion": "18.0.0",
+    "ios": {
+      "bundleIdentifier": "com.voluntizer"
+    },
+    "android": {
+      "package": "com.voluntizer"
+    }
+  }
+}
