@@ -10,7 +10,7 @@
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
     "start": "react-native-scripts start",
-    "build": "relay-compiler --src ./App/components --schema ./App/resources/graphql.schema.json",
+    "build": "relay-compiler --src ./App/js --schema ./App/resources/graphql.schema.json",
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
