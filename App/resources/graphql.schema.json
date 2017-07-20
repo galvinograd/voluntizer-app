@@ -44,6 +44,33 @@
               "deprecationReason": null
             },
             {
+              "name": "getDevice",
+              "description": "Get objects of type Device by id.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Device",
+                "ofType": null
+              },
+              "args": [
+                {
+                  "name": "id",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "getMessage",
               "description": "Get objects of type Message by id.",
               "type": {
@@ -204,6 +231,11 @@
           "possibleTypes": [
             {
               "kind": "OBJECT",
+              "name": "Device",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
               "name": "Message",
               "ofType": null
             },
@@ -248,6 +280,177 @@
               "ofType": null
             }
           ]
+        },
+        {
+          "kind": "OBJECT",
+          "name": "Device",
+          "description": "The Device type",
+          "fields": [
+            {
+              "name": "createdAt",
+              "description": "When paired with the Node interface, this is an automatically managed\n          timestamp that is set when an object is first created.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "id",
+              "description": "A globally unique ID.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expoToken",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "modifiedAt",
+              "description": "When paired with the Node interface, this is an automatically managed\n          timestamp that is set whenever an object is mutated.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [
+            {
+              "kind": "INTERFACE",
+              "name": "Node",
+              "ofType": null
+            },
+            {
+              "kind": "INTERFACE",
+              "name": "Timestamped",
+              "ofType": null
+            }
+          ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INTERFACE",
+          "name": "Timestamped",
+          "description": null,
+          "fields": [
+            {
+              "name": "modifiedAt",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": [
+            {
+              "kind": "OBJECT",
+              "name": "Device",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Message",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "User",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "Role",
+              "ofType": null
+            },
+            {
+              "kind": "OBJECT",
+              "name": "UserRoles",
+              "ofType": null
+            }
+          ]
+        },
+        {
+          "kind": "SCALAR",
+          "name": "DateTime",
+          "description": "The `DateTime` type represents a single point in time and is stored with\n                  millisecond precision plus a time zone specified by ISO 8601. All types come\n                  preloaded with createdAt and modifiedAt timestamps that are automatically managed\n                  for you.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "SCALAR",
+          "name": "String",
+          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
         },
         {
           "kind": "OBJECT",
@@ -360,90 +563,6 @@
               "ofType": null
             }
           ],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "INTERFACE",
-          "name": "Timestamped",
-          "description": null,
-          "fields": [
-            {
-              "name": "modifiedAt",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "DateTime",
-                  "ofType": null
-                }
-              },
-              "args": [],
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "createdAt",
-              "description": null,
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "DateTime",
-                  "ofType": null
-                }
-              },
-              "args": [],
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": [
-            {
-              "kind": "OBJECT",
-              "name": "Message",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "User",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "Role",
-              "ofType": null
-            },
-            {
-              "kind": "OBJECT",
-              "name": "UserRoles",
-              "ofType": null
-            }
-          ]
-        },
-        {
-          "kind": "SCALAR",
-          "name": "DateTime",
-          "description": "The `DateTime` type represents a single point in time and is stored with\n                  millisecond precision plus a time zone specified by ISO 8601. All types come\n                  preloaded with createdAt and modifiedAt timestamps that are automatically managed\n                  for you.",
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "SCALAR",
-          "name": "String",
-          "description": "The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.",
-          "fields": null,
-          "inputFields": null,
-          "interfaces": null,
           "enumValues": null,
           "possibleTypes": null
         },
@@ -5993,6 +6112,83 @@
               "deprecationReason": null
             },
             {
+              "name": "allDevices",
+              "description": "Sift through all objects of type 'Device'.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceConnection",
+                "ofType": null
+              },
+              "args": [
+                {
+                  "name": "where",
+                  "description": null,
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DeviceWhereArgs",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "orderBy",
+                  "description": null,
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "DeviceOrderByArgs",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "first",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "after",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "last",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "before",
+                  "description": null,
+                  "type": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "allMessages",
               "description": "Sift through all objects of type 'Message'.",
               "type": {
@@ -6244,6 +6440,930 @@
               "ofType": null
             }
           ],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceWhereArgs",
+          "description": "Where filter arguments for the Device type",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "createdAt",
+              "description": "Filter results for on the createdAt field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceCreatedAtWhereArgs",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "Filter results for on the id field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceIdWhereArgs",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "expoToken",
+              "description": "Filter results for on the expoToken field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceExpoTokenWhereArgs",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "modifiedAt",
+              "description": "Filter results for on the modifiedAt field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceModifiedAtWhereArgs",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "OR",
+              "description": "Combine mutiple where expressions using the OR operator.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "DeviceWhereArgs",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "AND",
+              "description": "Combine mutiple where expressions using the AND operator.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "DeviceWhereArgs",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceCreatedAtWhereArgs",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gt",
+              "description": "Greater than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gte",
+              "description": "Greater than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lt",
+              "description": "Less than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lte",
+              "description": "Less than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "between",
+              "description": "A two element tuple describing a range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notBetween",
+              "description": "A two element tuple describing an excluded range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "like",
+              "description": "A pattern to match for likeness.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notLike",
+              "description": "A pattern to match for likeness and exclude.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceIdWhereArgs",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceExpoTokenWhereArgs",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gt",
+              "description": "Greater than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gte",
+              "description": "Greater than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lt",
+              "description": "Less than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lte",
+              "description": "Less than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "between",
+              "description": "A two element tuple describing a range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notBetween",
+              "description": "A two element tuple describing an excluded range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "like",
+              "description": "A pattern to match for likeness.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notLike",
+              "description": "A pattern to match for likeness and exclude.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceModifiedAtWhereArgs",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gt",
+              "description": "Greater than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gte",
+              "description": "Greater than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lt",
+              "description": "Less than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lte",
+              "description": "Less than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "between",
+              "description": "A two element tuple describing a range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notBetween",
+              "description": "A two element tuple describing an excluded range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "like",
+              "description": "A pattern to match for likeness.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notLike",
+              "description": "A pattern to match for likeness and exclude.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceOrderByArgs",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "field",
+              "description": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "DeviceOrderByField",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "direction",
+              "description": null,
+              "type": {
+                "kind": "ENUM",
+                "name": "OrderByDirection",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "DeviceOrderByField",
+          "description": "Values for the DeviceOrderByField enum",
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "createdAt",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "id",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expoToken",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "modifiedAt",
+              "description": null,
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeviceConnection",
+          "description": "An edge wraps a node and a cursor. Edges are returned by\n      Connection types as a standard way to paginate through connection values.",
+          "fields": [
+            {
+              "name": "edges",
+              "description": "The set of edges in this page.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "DeviceEdge",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "pageInfo",
+              "description": "Metadata on the current page of data.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "PageInfo",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "aggregations",
+              "description": "Aggregation operators for the Device type.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceAggregations",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeviceEdge",
+          "description": "An edge wraps a node and a cursor. Edges are returned by\n      Connection types as a standard way to paginate through connection values.",
+          "fields": [
+            {
+              "name": "node",
+              "description": "The node value for the edge.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "Device",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "cursor",
+              "description": "An opaque cursor pointing to an object in a connection.\n          Used by the 'after' and 'before' pagination arguments.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeviceAggregations",
+          "description": null,
+          "fields": [
+            {
+              "name": "count",
+              "description": "Returns the number of objects in the connection.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "min",
+              "description": "The minimum value for the field",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceAggregationsMin",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "max",
+              "description": "The maximum value for the field",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceAggregationsMax",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeviceAggregationsMin",
+          "description": null,
+          "fields": [
+            {
+              "name": "createdAt",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "modifiedAt",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expoToken",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeviceAggregationsMax",
+          "description": null,
+          "fields": [
+            {
+              "name": "createdAt",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "modifiedAt",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "expoToken",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
           "enumValues": null,
           "possibleTypes": null
         },
@@ -8960,6 +10080,87 @@
               "deprecationReason": null
             },
             {
+              "name": "createDevice",
+              "description": "Create objects of type Device.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "CreateDevicePayload",
+                "ofType": null
+              },
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "CreateDeviceInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateDevice",
+              "description": "Update objects of type Device.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "UpdateDevicePayload",
+                "ofType": null
+              },
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "UpdateDeviceInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteDevice",
+              "description": "Delete objects of type Device.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeleteDevicePayload",
+                "ofType": null
+              },
+              "args": [
+                {
+                  "name": "input",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "DeleteDeviceInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "createMessage",
               "description": "Create objects of type Message.",
               "type": {
@@ -10917,6 +12118,294 @@
         },
         {
           "kind": "INPUT_OBJECT",
+          "name": "CreateDeviceInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "expoToken",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "CreateDevicePayload",
+          "description": null,
+          "fields": [
+            {
+              "name": "changedDevice",
+              "description": "The mutated Device.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Device",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "changedEdge",
+              "description": "An edge containing the mutated Device. Use this to update your client side cache.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceEdge",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "viewer",
+              "description": "A view port into your application.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Viewer",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "An opaque string used by frontend frameworks like relay to track requests and responses.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "UpdateDeviceInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "expoToken",
+              "description": null,
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "An opaque string used by frontend frameworks like relay to track requests and responses.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "UpdateDevicePayload",
+          "description": null,
+          "fields": [
+            {
+              "name": "changedDevice",
+              "description": "The mutated Device.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Device",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "changedEdge",
+              "description": "An edge containing the mutated Device. Use this to update your client side cache.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceEdge",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "viewer",
+              "description": "A view port into your application.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Viewer",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "An opaque string used by frontend frameworks like relay to track requests and responses.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeleteDeviceInput",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "id",
+              "description": null,
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "An opaque string used by frontend frameworks like relay to track requests and responses.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeleteDevicePayload",
+          "description": null,
+          "fields": [
+            {
+              "name": "changedDevice",
+              "description": "The mutated Device.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Device",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "changedEdge",
+              "description": "An edge containing the mutated Device. Use this to update your client side cache.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceEdge",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "viewer",
+              "description": "A view port into your application.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Viewer",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "clientMutationId",
+              "description": "An opaque string used by frontend frameworks like relay to track requests and responses.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
           "name": "CreateMessageInput",
           "description": null,
           "fields": null,
@@ -12424,6 +13913,47 @@
           "description": null,
           "fields": [
             {
+              "name": "subscribeToDevice",
+              "description": null,
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceSubscriptionPayload",
+                "ofType": null
+              },
+              "args": [
+                {
+                  "name": "filter",
+                  "description": null,
+                  "type": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "DeviceSubscriptionFilter",
+                    "ofType": null
+                  },
+                  "defaultValue": null
+                },
+                {
+                  "name": "mutations",
+                  "description": null,
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "LIST",
+                      "name": null,
+                      "ofType": {
+                        "kind": "ENUM",
+                        "name": "DeviceMutationEvent",
+                        "ofType": null
+                      }
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
               "name": "subscribeToMessage",
               "description": null,
               "type": {
@@ -12543,6 +14073,713 @@
                   "defaultValue": null
                 }
               ],
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceSubscriptionFilter",
+          "description": "Subscription filter arguments for the Device type",
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "createdAt",
+              "description": "Filter results for on the createdAt field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceCreatedAtSubscriptionFilters",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "id",
+              "description": "Filter results for on the id field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceIdSubscriptionFilters",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "expoToken",
+              "description": "Filter results for on the expoToken field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceExpoTokenSubscriptionFilters",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "modifiedAt",
+              "description": "Filter results for on the modifiedAt field.",
+              "type": {
+                "kind": "INPUT_OBJECT",
+                "name": "DeviceModifiedAtSubscriptionFilters",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceCreatedAtSubscriptionFilters",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gt",
+              "description": "Greater than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gte",
+              "description": "Greater than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lt",
+              "description": "Less than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lte",
+              "description": "Less than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "between",
+              "description": "A two element tuple describing a range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notBetween",
+              "description": "A two element tuple describing an excluded range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "like",
+              "description": "A pattern to match for likeness.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notLike",
+              "description": "A pattern to match for likeness and exclude.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "matches",
+              "description": "A regular expression to match on. Note that unlike 'like' this uses regular expression syntax instead of SQL like syntax.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notMatches",
+              "description": "A regular expression to reject on. Note that unlike 'like' this uses regular expression syntax instead of SQL like syntax.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceIdSubscriptionFilters",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "ID",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceExpoTokenSubscriptionFilters",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gt",
+              "description": "Greater than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gte",
+              "description": "Greater than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lt",
+              "description": "Less than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lte",
+              "description": "Less than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "between",
+              "description": "A two element tuple describing a range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notBetween",
+              "description": "A two element tuple describing an excluded range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "like",
+              "description": "A pattern to match for likeness.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notLike",
+              "description": "A pattern to match for likeness and exclude.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "matches",
+              "description": "A regular expression to match on. Note that unlike 'like' this uses regular expression syntax instead of SQL like syntax.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notMatches",
+              "description": "A regular expression to reject on. Note that unlike 'like' this uses regular expression syntax instead of SQL like syntax.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "DeviceModifiedAtSubscriptionFilters",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "eq",
+              "description": "Equal to. This takes a higher precedence than the other operators.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gt",
+              "description": "Greater than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "gte",
+              "description": "Greater than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lt",
+              "description": "Less than.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "lte",
+              "description": "Less than or equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "ne",
+              "description": "Not equal to.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "between",
+              "description": "A two element tuple describing a range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notBetween",
+              "description": "A two element tuple describing an excluded range of values.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "in",
+              "description": "A list of values to include.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notIn",
+              "description": "A list of values to exclude.",
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "DateTime",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "like",
+              "description": "A pattern to match for likeness.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notLike",
+              "description": "A pattern to match for likeness and exclude.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "matches",
+              "description": "A regular expression to match on. Note that unlike 'like' this uses regular expression syntax instead of SQL like syntax.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "notMatches",
+              "description": "A regular expression to reject on. Note that unlike 'like' this uses regular expression syntax instead of SQL like syntax.",
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "isNull",
+              "description": "Filters for null values. This takes precedence after 'eq' but before all other fields",
+              "type": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "ENUM",
+          "name": "DeviceMutationEvent",
+          "description": null,
+          "fields": null,
+          "inputFields": null,
+          "interfaces": null,
+          "enumValues": [
+            {
+              "name": "createDevice",
+              "description": "Subscribe to this event to be notified after every createDevice mutation.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updateDevice",
+              "description": "Subscribe to this event to be notified after every updateDevice mutation.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteDevice",
+              "description": "Subscribe to this event to be notified after every deleteDevice mutation.",
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "DeviceSubscriptionPayload",
+          "description": "A payload wrapper for mutation operations.",
+          "fields": [
+            {
+              "name": "mutation",
+              "description": "The type of mutation operation that triggered this subscription.",
+              "type": {
+                "kind": "ENUM",
+                "name": "DeviceMutationEvent",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "value",
+              "description": "The object that was just mutated.",
+              "type": {
+                "kind": "OBJECT",
+                "name": "Device",
+                "ofType": null
+              },
+              "args": [],
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "edge",
+              "description": null,
+              "type": {
+                "kind": "OBJECT",
+                "name": "DeviceEdge",
+                "ofType": null
+              },
+              "args": [],
               "isDeprecated": false,
               "deprecationReason": null
             }
