@@ -3,12 +3,13 @@
     "name": "Voluntizer",
     "version": "1.0.0",
     "slug": "voluntizer",
-    "sdkVersion": "18.0.0",
+    "sdkVersion": "19.0.0",
     "ios": {
       "bundleIdentifier": "com.voluntizer"
     },
     "android": {
-      "package": "com.voluntizer"
+      "package": "com.voluntizer",
+      "permissions": ["READ_INTERNAL_STORAGE", "VIBRATE", "com.sec.android.provider.badge.permission.READ", "com.sec.android.provider.badge.permission.WRITE", "com.sonyericsson.home.permission.BROADCAST_BADGE"]
     }
   }
 }
