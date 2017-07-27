@@ -25,9 +25,17 @@ export default class ExpoFacade {
         try {
             const data = await this.client.sendPushNotificationsAsync(chunk);
             for (let i in data) {
-                const status = data[i]['status'];
-                if (status !== 'ok') {
-                    winston.warn('token %s has status %s ("ok" expected)', chunk[i]['to'], status);
+                const expoStatus = data[i]['status'];
+                if (expoStatus !== 'ok') {
+                    const expoTo = chunk[i]['to'];
+                    const expoMessage = data[i]['message'];
+                    const expoDetails = JSON.stringify(data[i]['details']);
+                    winston.warn(
+                        'token %s has status %s ("ok" expected). message: %s. details: %s',
+                        expoTo,
+                        expoStatus,
+                        expoMessage,
+                        expoDetails);
                 }
             }
         } catch (error) {
