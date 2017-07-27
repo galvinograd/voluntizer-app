@@ -1,15 +1,17 @@
 {
   "expo": {
-    "name": "Voluntizer",
-    "version": "1.0.0",
-    "slug": "voluntizer",
+    "name": "התנדבויות באגודה",
+    "icon": "./icon.png",
+    "version": "1.0.1",
+    "slug": "voluntizer-haaguda",
     "sdkVersion": "19.0.0",
     "ios": {
       "bundleIdentifier": "com.voluntizer"
     },
     "android": {
       "package": "com.voluntizer",
-      "permissions": ["READ_INTERNAL_STORAGE", "VIBRATE", "com.sec.android.provider.badge.permission.READ", "com.sec.android.provider.badge.permission.WRITE", "com.sonyericsson.home.permission.BROADCAST_BADGE"]
+      "permissions": ["READ_INTERNAL_STORAGE", "VIBRATE", "com.sec.android.provider.badge.permission.READ", "com.sec.android.provider.badge.permission.WRITE", "com.sonyericsson.home.permission.BROADCAST_BADGE", "com.google.android.c2dm.permission.RECEIVE", "com.google.android.providers.gsf.permission.READ_GSERVICES"],
+      "versionCode": 6
     }
   }
 }
