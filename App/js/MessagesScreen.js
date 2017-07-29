@@ -1,6 +1,7 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {AppState, FlatList, StyleSheet, View} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
+import {Notifications} from 'expo';
 import MessagesItem from './MessagesItem';
 import {lightGray} from './Styles';
 
@@ -18,27 +19,46 @@ class MessagesScreen extends React.Component {
                 renderItem={this._renderItem}
                 ItemSeparatorComponent={MessagesScreen._renderSeparator}
                 keyExtractor={MessagesScreen._keyExtractor}
-                onRefresh={this._onRefresh.bind(this)}
+                onRefresh={this._onRefresh}
                 refreshing={this.state.refreshing}/>
         );
     }
 
-    _onRefresh() {
+    componentDidMount() {
+        AppState.addEventListener('change', this._onAppStateActive);
+        this._notificationSubscription = Notifications.addListener(this._handleNotification);
+    }
+
+    componentWillUnmount() {
+        AppState.removeEventListener('change', this._onAppStateActive);
+    }
+
+    _handleNotification = (notification) => {
+        this.setState({notification: notification});
+    };
+
+    _onAppStateActive = (state) => {
+        if (state === 'active') {
+            this._onRefresh();
+        }
+    };
+
+    _onRefresh = () => {
         this.setState({refreshing: true});
         this.props.relay.refetch(
             null,
             null,
-            this._onRefreshFinished.bind(this),
+            this._onRefreshFinished,
             {force: true},
         );
-    }
+    };
 
-    _onRefreshFinished(error) {
+    _onRefreshFinished = (error) => {
         if (error) {
             console.log('something is missing');
         }
         this.setState({refreshing: false})
-    }
+    };
 
     _renderItem = ({item}) => {
         return <MessagesItem
@@ -50,9 +70,9 @@ class MessagesScreen extends React.Component {
         this.props.navigation.navigate('Message', this._findMessage(id));
     };
 
-    _findMessage(id) {
+    _findMessage = (id) => {
         return this.props.messages.allMessages.edges.find(n => n.node.id === id).node
-    }
+    };
 
     static _renderSeparator() {
         return <View
