@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppState, FlatList, StyleSheet, View} from 'react-native';
+import {AppState, FlatList, StyleSheet, View, Picker} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
 import {Notifications} from 'expo';
 import MessagesItem from './MessagesItem';
@@ -12,15 +12,29 @@ class MessagesScreen extends React.Component {
     };
 
     render() {
+        console.log(this.props.messages.allMessages.edges[0].node.text||'NULL');
+        console.log(`Render: state:${JSON.stringify(this.state)}`);
+
         return (
-            <FlatList
+            <View>
+                <FlatList
                 style={styles.container}
-                data={this.props.messages.allMessages.edges}
+                data={this.props.messages.allMessages.edges.filter(item=>(!this.state.region || item.node.text.indexOf(this.state.region)!==-1))}
                 renderItem={this._renderItem}
                 ItemSeparatorComponent={MessagesScreen._renderSeparator}
                 keyExtractor={MessagesScreen._keyExtractor}
                 onRefresh={this._onRefresh}
                 refreshing={this.state.refreshing}/>
+                 <Picker
+                    selectedValue={this.state.region}
+                    onValueChange={(itemValue, itemIndex) => {console.log(`State change. val=${itemValue}, indx=${itemIndex}`);this.setState({region: itemValue});}}>
+                        <Picker.Item label="כל הארץ" value="" />
+                        <Picker.Item label="תל-אביב" value="telaviv" />
+                        <Picker.Item label="ירושלים" value="jerusalem" />
+                        <Picker.Item label="באר-שבע" value="beersheva" />
+                        <Picker.Item label="חיפה" value="haifa" />
+                </Picker>
+            </View>
         );
     }
 
