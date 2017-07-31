@@ -1,4 +1,3 @@
-import React from 'react';
 import {Notifications, Permissions} from 'expo';
 
 async function registerExpoToken() {
@@ -15,8 +14,7 @@ async function registerExpoToken() {
     }
 
     if (finalStatus !== 'granted') {
-        // return finalStatus;
-        console.log(finalStatus);
+        throw 'notification permission was not granted';
     }
 
     return await Notifications.getExponentPushTokenAsync();

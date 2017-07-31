@@ -1,4 +1,3 @@
-import React from 'react';
 import {Environment, Network, RecordSource, Store} from 'relay-runtime';
 import {GRAPHQL_ENDPOINT} from './Config';
 
