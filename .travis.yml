@@ -1,0 +1,27 @@
+language: node_js
+node_js: "7"
+cache: yarn
+sudo: required
+before_install:
+  - sudo apt-key adv --fetch-keys http://dl.yarnpkg.com/debian/pubkey.gpg
+  - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+  - sudo apt-get update -qq
+  - sudo apt-get install -y -qq yarn
+  - sudo sysctl fs.inotify.max_user_watches=524288
+  - sudo sysctl fs.inotify.max_queued_events=524288
+  - sudo sysctl -p
+  - git clone --branch v4.1.0 https://github.com/facebook/watchman.git
+  - pushd watchman && ./autogen.sh && ./configure && make && sudo make install && popd
+install:
+  - yarn install
+script:
+  - yarn run lint
+deploy:
+  provider: script
+  script:
+    yarn install &&
+    yarn run build &&
+    node_modules/.bin/exp login --username $EXP_USER --password $EXP_PASS &&
+    node_modules/.bin/exp publish
+  on:
+    branch: master

@@ -1,4 +1,5 @@
 import {commitMutation, graphql} from 'react-relay';
+import {logEvent, wakeMeUp} from './Logger';
 
 const mutation = graphql`
     mutation CreateDeviceMutation($input: CreateDeviceInput!) {
@@ -11,7 +12,6 @@ const mutation = graphql`
 `;
 
 export default function commit(environment, expoToken) {
-    console.log(expoToken);
     return commitMutation(
         environment, {
             mutation: mutation,
@@ -20,10 +20,8 @@ export default function commit(environment, expoToken) {
                     expoToken: expoToken,
                 }
             },
-            onCompleted: (response) => {
-                console.log('Success!')
-            },
-            onError: err => console.error(err),
+            onCompleted: response => logEvent('push notifications', 'register - backend', response),
+            onError: err => wakeMeUp('push notifications', 'register - backend', err),
         }
     );
 }

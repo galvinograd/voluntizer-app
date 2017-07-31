@@ -68,5 +68,5 @@ export default class ExpoFacade {
         } else {
             return body;
         }
-    };
+    }
 }
