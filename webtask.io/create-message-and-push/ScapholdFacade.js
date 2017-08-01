@@ -49,6 +49,7 @@ export default class ScapholdFacade {
 
         const loginUserToken = loginUserResult['data']['loginUser']['token'];
 
+        // eslint-disable-next-line no-unused-vars
         this.apolloFetch.use(({request, options}, next) => {
             if (!options.headers) {
                 options.headers = {};

@@ -2,6 +2,7 @@ import React from 'react';
 import {ActivityIndicator, Platform, StatusBar, Text} from 'react-native';
 import {StackNavigator} from 'react-navigation';
 import {graphql, QueryRenderer} from 'react-relay';
+import winston from 'winston';
 import {environment} from './Graphql';
 import ShowMessagesScreen from './ShowMessageScreen';
 import MessagesScreen from './MessagesScreen';
@@ -26,7 +27,7 @@ class MessagesScreenWithQuery extends React.Component {
                 render={
                     ({error, props}) => {
                         if (props) {
-                            return <MessagesScreen messages={props.viewer} navigation={this.props.navigation}/>
+                            return <MessagesScreen messages={props.viewer} navigation={this.props.navigation}/>;
                         } else if (error) {
                             return <Text>{error.message}</Text>;
                         } else {
@@ -41,41 +42,32 @@ class MessagesScreenWithQuery extends React.Component {
     componentDidMount() {
         registerExpoToken()
             .then((expoToken) => {
-                console.log(expoToken);
-                let x = CreateDeviceMutation(environment, expoToken);
-                console.log(x);
+                CreateDeviceMutation(environment, expoToken);
             })
-            .catch((error) => {
-                console.log(error)
-            });
+            .catch(err => winston.error(err));
     }
 }
 
 export default StackNavigator({
-        MessageList: {
-            screen: MessagesScreenWithQuery,
-            navigationOptions: {
-                title: 'הודעות',
-                headerBackTitle: ' ',
-                headerTintColor: 'purple',
-                headerTitleStyle: {color: 'black'}
-            }
-        },
-        Message: {
-            screen: ShowMessagesScreen,
-            navigationOptions: ({
-                                    navigation
-                                }) =>
-                ({
-                    title: navigation.state.params.title,
-                    headerTintColor: 'purple',
-                    headerTitleStyle: {color: 'black'}
-                }),
-        },
-    },
-    {
-        cardStyle: {
-            paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
+    MessageList: {
+        screen: MessagesScreenWithQuery,
+        navigationOptions: {
+            title: 'הודעות',
+            headerBackTitle: ' ',
+            headerTintColor: 'purple',
+            headerTitleStyle: {color: 'black'}
         }
+    },
+    Message: {
+        screen: ShowMessagesScreen,
+        navigationOptions: ({navigation}) => ({
+            title: navigation.state.params.title,
+            headerTintColor: 'purple',
+            headerTitleStyle: {color: 'black'}
+        }),
+    },
+}, {
+    cardStyle: {
+        paddingTop: Platform.OS === 'ios' ? 0 : StatusBar.currentHeight
     }
-);
+});

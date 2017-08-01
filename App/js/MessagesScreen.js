@@ -1,7 +1,9 @@
+// @flow
 import React from 'react';
 import {AppState, FlatList, StyleSheet, View} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
 import {Notifications} from 'expo';
+import winston from 'winston';
 import MessagesItem from './MessagesItem';
 import {lightGray} from './Styles';
 
@@ -55,15 +57,17 @@ class MessagesScreen extends React.Component {
 
     _onRefreshFinished = (error) => {
         if (error) {
-            console.log('something is missing');
+            winston.error(
+                'refresh failed with %s',
+                JSON.stringify(error));
         }
-        this.setState({refreshing: false})
+        this.setState({refreshing: false});
     };
 
     _renderItem = ({item}) => {
         return <MessagesItem
             message={item.node}
-            onPressItem={this._onPressItem}/>
+            onPressItem={this._onPressItem}/>;
     };
 
     _onPressItem = (id: string) => {
@@ -71,21 +75,22 @@ class MessagesScreen extends React.Component {
     };
 
     _findMessage = (id) => {
-        return this.props.messages.allMessages.edges.find(n => n.node.id === id).node
+        return this.props.messages.allMessages.edges.find(n => n.node.id === id).node;
     };
 
     static _renderSeparator() {
-        return <View
-            style={styles.separator}/>
-    };
+        return <View style={styles.separator}/>;
+    }
 
+    // eslint-disable-next-line no-unused-vars
     static _keyExtractor(item, index) {
         return item.node.id;
     }
 }
 
 
-export default createRefetchContainer(MessagesScreen, {
+export default createRefetchContainer(MessagesScreen,
+    {
         messages: graphql`
             fragment MessagesScreen_messages on Viewer {
                 allMessages {
