@@ -14,7 +14,7 @@ export default class ShowMessagesScreen extends React.Component {
         };
 
         const _onMessagePress = () => {
-            text(params.owner.mobile, 'אני אשמח להצטרף! אפשר לשמוע עוד פרטים?');
+            text(params.owner.mobile, 'אני אשמח להצטרף! אפשר לשמוע עוד פרטים על ״' + params.title + '״?');
         };
 
         return (
