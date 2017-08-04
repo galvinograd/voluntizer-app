@@ -20,7 +20,7 @@ class MessagesScreen extends React.Component {
             <View>
                 <FlatList
                 style={styles.container}
-                data={this.props.messages.allMessages.edges.filter(item=>(!this.state.region || item.node.text.indexOf(this.state.region)!==-1))}
+                data={this.props.messages.allMessages.edges}
                 renderItem={this._renderItem}
                 ItemSeparatorComponent={MessagesScreen._renderSeparator}
                 keyExtractor={MessagesScreen._keyExtractor}
