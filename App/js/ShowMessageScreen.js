@@ -9,12 +9,12 @@ export default class ShowMessagesScreen extends React.Component {
     render() {
         const {params} = this.props.navigation.state;
 
-        _onCallPress = () => {
+        const _onCallPress = () => {
             phonecall(params.owner.mobile, false);
         };
 
-        _onMessagePress = () => {
-            text(params.owner.mobile, 'אני אשמח להצטרף! אפשר לשמוע עוד פרטים?');
+        const _onMessagePress = () => {
+            text(params.owner.mobile, 'אני אשמח להצטרף! אפשר לשמוע עוד פרטים על ״' + params.title + '״?');
         };
 
         return (

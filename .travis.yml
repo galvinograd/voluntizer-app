@@ -1,0 +1,16 @@
+language: node_js
+node_js:
+  - "7"
+cache:
+  yarn: true
+before_install:
+  - npm install -g exp yarn
+install:
+  - yarn install
+script:
+  - yarn run lint
+deploy:
+  provider: script
+  script: exp login --username $EXP_USER --password $EXP_PASS && exp publish
+  on:
+    branch: master
