@@ -1,6 +1,6 @@
 // @flow
 import React from 'react';
-import {AppState, FlatList, StyleSheet, View, Picker} from 'react-native';
+import {AppState, FlatList, StyleSheet, View} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
 import MessagesItem from './MessagesItem';
 import {lightGray} from './Styles';
@@ -13,19 +13,16 @@ class MessagesScreen extends React.Component {
     };
 
     render() {
-        console.log(this.props.messages.allMessages.edges[0].node.text||'NULL');
-        console.log(`Render: state:${JSON.stringify(this.state)}`);
-
         return (
             <View>
                 <FlatList
-                style={styles.container}
-                data={this.props.messages.allMessages.edges}
-                renderItem={this._renderItem}
-                ItemSeparatorComponent={MessagesScreen._renderSeparator}
-                keyExtractor={MessagesScreen._keyExtractor}
-                onRefresh={this._onRefresh}
-                refreshing={this.state.refreshing}/>
+                    style={styles.container}
+                    data={this.props.messages.allMessages.edges}
+                    renderItem={this._renderItem}
+                    ItemSeparatorComponent={MessagesScreen._renderSeparator}
+                    keyExtractor={MessagesScreen._keyExtractor}
+                    onRefresh={this._onRefresh}
+                    refreshing={this.state.refreshing}/>
             </View>
         );
     }
