@@ -3,7 +3,7 @@ import {TouchableWithoutFeedback, View, StyleSheet} from 'react-native';
 import {FontAwesome} from '@expo/vector-icons';
 import {AppStyles} from './Styles';
 
-export default function ({faName, onPress, style = null}) {
+function RoundButton({faName, onPress, style = null}) {
     return (
         <TouchableWithoutFeedback onPress={onPress}>
             <View style={[styles.buttonRound, AppStyles.smallCircle, style]}>
@@ -14,8 +14,10 @@ export default function ({faName, onPress, style = null}) {
                     size={15}/>
             </View>
         </TouchableWithoutFeedback>
-    )
+    );
 }
+
+export default RoundButton;
 
 const styles = StyleSheet.create({
     buttonRound: {

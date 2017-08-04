@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "eslint": "^4.3.0",
+    "eslint-plugin-flowtype": "^2.35.0",
+    "eslint-plugin-react": "^7.1.0",
+    "exp": "^43.0.0",
     "jest-expo": "~19.0.0",
     "react-native-scripts": "0.0.50",
     "react-test-renderer": "16.0.0-alpha.12"
@@ -14,7 +19,8 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "lint": "node node_modules/eslint/bin/eslint.js --ignore-pattern node_modules --color App webtask.io"
   },
   "jest": {
     "preset": "jest-expo"
