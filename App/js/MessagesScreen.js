@@ -1,9 +1,10 @@
+// @flow
 import React from 'react';
 import {AppState, FlatList, StyleSheet, View, Picker} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
-import {Notifications} from 'expo';
 import MessagesItem from './MessagesItem';
 import {lightGray} from './Styles';
+import {logEvent, wakeMeUp} from './Logger';
 
 
 class MessagesScreen extends React.Component {
@@ -40,19 +41,15 @@ class MessagesScreen extends React.Component {
 
     componentDidMount() {
         AppState.addEventListener('change', this._onAppStateActive);
-        this._notificationSubscription = Notifications.addListener(this._handleNotification);
     }
 
     componentWillUnmount() {
         AppState.removeEventListener('change', this._onAppStateActive);
     }
 
-    _handleNotification = (notification) => {
-        this.setState({notification: notification});
-    };
-
     _onAppStateActive = (state) => {
         if (state === 'active') {
+            logEvent('root', 'app opened');
             this._onRefresh();
         }
     };
@@ -69,37 +66,41 @@ class MessagesScreen extends React.Component {
 
     _onRefreshFinished = (error) => {
         if (error) {
-            console.log('something is missing');
+            wakeMeUp('message list', 'refresh failed', error);
+        } else {
+            logEvent('message list', 'refresh');
         }
-        this.setState({refreshing: false})
+        this.setState({refreshing: false});
     };
 
     _renderItem = ({item}) => {
         return <MessagesItem
             message={item.node}
-            onPressItem={this._onPressItem}/>
+            onPressItem={this._onPressItem}/>;
     };
 
     _onPressItem = (id: string) => {
+        logEvent('message list', 'select message', id);
         this.props.navigation.navigate('Message', this._findMessage(id));
     };
 
     _findMessage = (id) => {
-        return this.props.messages.allMessages.edges.find(n => n.node.id === id).node
+        return this.props.messages.allMessages.edges.find(n => n.node.id === id).node;
     };
 
     static _renderSeparator() {
-        return <View
-            style={styles.separator}/>
-    };
+        return <View style={styles.separator}/>;
+    }
 
+    // eslint-disable-next-line no-unused-vars
     static _keyExtractor(item, index) {
         return item.node.id;
     }
 }
 
 
-export default createRefetchContainer(MessagesScreen, {
+export default createRefetchContainer(MessagesScreen,
+    {
         messages: graphql`
             fragment MessagesScreen_messages on Viewer {
                 allMessages {

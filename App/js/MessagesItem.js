@@ -5,7 +5,7 @@ import {AppStyles, unit, unitSpace} from './Styles';
 
 export default class MessagesItem extends React.Component {
     render() {
-        parsedDate = new Date(this.props.message.createdAt);
+        const parsedDate = new Date(this.props.message.createdAt);
         return (
             <TouchableWithoutFeedback
                 onPress={this._onPress}>
@@ -26,7 +26,7 @@ export default class MessagesItem extends React.Component {
                     </View>
                 </View>
             </TouchableWithoutFeedback>
-        )
+        );
     }
 
     _onPress = () => {
