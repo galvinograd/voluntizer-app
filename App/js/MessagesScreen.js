@@ -26,15 +26,6 @@ class MessagesScreen extends React.Component {
                 keyExtractor={MessagesScreen._keyExtractor}
                 onRefresh={this._onRefresh}
                 refreshing={this.state.refreshing}/>
-                 <Picker
-                    selectedValue={this.state.region}
-                    onValueChange={(itemValue, itemIndex) => {console.log(`State change. val=${itemValue}, indx=${itemIndex}`);this.setState({region: itemValue});}}>
-                        <Picker.Item label="כל הארץ" value="" />
-                        <Picker.Item label="תל-אביב" value="telaviv" />
-                        <Picker.Item label="ירושלים" value="jerusalem" />
-                        <Picker.Item label="באר-שבע" value="beersheva" />
-                        <Picker.Item label="חיפה" value="haifa" />
-                </Picker>
             </View>
         );
     }
