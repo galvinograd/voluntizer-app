@@ -14,16 +14,14 @@ class MessagesScreen extends React.Component {
 
     render() {
         return (
-            <View>
-                <FlatList
-                    style={styles.container}
-                    data={this.props.messages.allMessages.edges}
-                    renderItem={this._renderItem}
-                    ItemSeparatorComponent={MessagesScreen._renderSeparator}
-                    keyExtractor={MessagesScreen._keyExtractor}
-                    onRefresh={this._onRefresh}
-                    refreshing={this.state.refreshing}/>
-            </View>
+            <FlatList
+                style={styles.container}
+                data={this.props.messages.allMessages.edges}
+                renderItem={this._renderItem}
+                ItemSeparatorComponent={MessagesScreen._renderSeparator}
+                keyExtractor={MessagesScreen._keyExtractor}
+                onRefresh={this._onRefresh}
+                refreshing={this.state.refreshing}/>
         );
     }
 
