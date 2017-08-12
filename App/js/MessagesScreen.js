@@ -4,7 +4,10 @@ import {AppState, FlatList, StyleSheet, View} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
 import MessagesItem from './MessagesItem';
 import {lightGray} from './Styles';
-import {logEvent, wakeMeUp} from './Logger';
+import {logEvent, logTrace, wakeMeUp} from './Logger';
+import UserAgentExtractor from './UserAgentExtractor';
+import GAFacade from './GAFacade';
+import PushNotificationsFacade from './PushNotificationsFacade';
 
 
 class MessagesScreen extends React.Component {
@@ -14,14 +17,18 @@ class MessagesScreen extends React.Component {
 
     render() {
         return (
-            <FlatList
-                style={styles.container}
-                data={this.props.messages.allMessages.edges}
-                renderItem={this._renderItem}
-                ItemSeparatorComponent={MessagesScreen._renderSeparator}
-                keyExtractor={MessagesScreen._keyExtractor}
-                onRefresh={this._onRefresh}
-                refreshing={this.state.refreshing}/>
+            <View>
+                <UserAgentExtractor
+                    onUserAgent={this._initGA}/>
+                <FlatList
+                    style={styles.container}
+                    data={this.props.messages.allMessages.edges}
+                    renderItem={this._renderItem}
+                    ItemSeparatorComponent={MessagesScreen._renderSeparator}
+                    keyExtractor={MessagesScreen._keyExtractor}
+                    onRefresh={this._onRefresh}
+                    refreshing={this.state.refreshing}/>
+            </View>
         );
     }
 
@@ -32,6 +39,37 @@ class MessagesScreen extends React.Component {
     componentWillUnmount() {
         AppState.removeEventListener('change', this._onAppStateActive);
     }
+
+    _initGA = async(userAgent) => {
+        try {
+            logTrace(userAgent);
+            const pn = PushNotificationsFacade;
+
+            const expoToken = await pn.getExpoToken();
+            logTrace(expoToken);
+
+            GAFacade.init({
+                userAgent: userAgent,
+                clientId: expoToken || 'unregistered',
+                appVersion: 1,
+                bundleId: 'com.voluntizer',
+            });
+
+            if (!expoToken) {
+                wakeMeUp('push notifications', 'expo token is empty');
+                return;
+            }
+
+            pn.registerExpoToken(expoToken);
+
+            const granted = await pn.askPermissions();
+            if (!granted) {
+                logEvent('push notifications', 'permissions not granted');
+            }
+        } catch (error) {
+            wakeMeUp('push notifications', 'unexpected error', error);
+        }
+    };
 
     _onAppStateActive = (state) => {
         if (state === 'active') {

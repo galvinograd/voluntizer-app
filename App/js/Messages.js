@@ -5,7 +5,6 @@ import {graphql, QueryRenderer} from 'react-relay';
 import {environment} from './Graphql';
 import ShowMessagesScreen from './ShowMessageScreen';
 import MessagesScreen from './MessagesScreen';
-import {registerExpoToken} from './PushNotifications';
 
 class MessagesScreenWithQuery extends React.Component {
     render() {
@@ -35,10 +34,6 @@ class MessagesScreenWithQuery extends React.Component {
                 }
             />
         );
-    }
-
-    componentDidMount() {
-        registerExpoToken();
     }
 }
 
