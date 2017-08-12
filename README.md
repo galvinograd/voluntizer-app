@@ -23,9 +23,13 @@ All work on Voluntizer happens directly on GitHub. Both core team members and ex
 ### Report an Issue
 
 Tag the issue with the corresponding labels:
-- **placeholder** - for feature requests only, it marks a request without full specifications
+- **enhancement** - new feature, optimization or improvement
+- **bug** - unwanted or unexpected software behaviour
 - **effect users** - effect user experience
 - **infrastructure** - effect development and deployment environment
+- **placeholder** - for feature requests only, it marks a request without full specifications
+- **duplicate** - reserved for project admins
+- **wontfix** - reserved for project admins
 
 If the issue is a bug, please fill out the [issue template](ISSUE_TEMPLATE.md). This step is very important! Not doing so may result in your issue getting closed.
 
@@ -38,7 +42,7 @@ We will do our best to keep the master branch in good shape, with a green build 
 - If you added or removed essential steps in the development or deployment process, the changes reflected in .travis and README.md files.
 - Your code lints and follows our [Style Guide](#style-guide).
 - Your branch follows our [Branching Model](#branching-model).
-- The pull request name is "the github issue title - (fix - #123)"
+- The pull request name is "the github issue title (fix #123)"
 
 ### Branching Model
 
