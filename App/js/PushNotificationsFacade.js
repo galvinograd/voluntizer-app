@@ -1,11 +1,11 @@
 import {Notifications, Permissions} from 'expo';
-import {logEvent} from './Logger';
 import {environment} from './Graphql';
 import CreateDeviceMutation from './CreateDeviceMutation';
+import {logAction, logCodeEvent} from './Logger';
 
 class PushNotificationsFacade {
     registerExpoToken = (expoToken) => {
-        logEvent('push notifications', 'register - backend', 'attempt');
+        logCodeEvent('push notifications', 'register - backend', 'attempt');
         CreateDeviceMutation(environment, expoToken);
     };
 
@@ -13,7 +13,7 @@ class PushNotificationsFacade {
         const {existingStatus} = await Permissions.getAsync(Permissions.REMOTE_NOTIFICATIONS);
         let finalStatus = existingStatus;
 
-        logEvent('push notifications', 'existing permissions', existingStatus);
+        logCodeEvent('push notifications', 'existing permissions', existingStatus);
 
         // only ask if permissions have not already been determined, because
         // iOS won't necessarily prompt the user a second time.
@@ -23,7 +23,7 @@ class PushNotificationsFacade {
             const {status} = await Permissions.askAsync(Permissions.REMOTE_NOTIFICATIONS);
             finalStatus = status;
 
-            logEvent('push notifications', 'asked permissions', status);
+            logAction('push notifications', 'asked permissions', status);
         }
 
         return finalStatus === 'granted';
