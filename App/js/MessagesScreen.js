@@ -4,7 +4,11 @@ import {AppState, FlatList, StyleSheet, View} from 'react-native';
 import {createRefetchContainer, graphql} from 'react-relay';
 import MessagesItem from './MessagesItem';
 import {lightGray} from './Styles';
-import {logEvent, wakeMeUp} from './Logger';
+import {logAction, logCodeEvent, logTrace, wakeMeUp} from './Logger';
+import UserAgentExtractor from './UserAgentExtractor';
+import GAFacade from './GAFacade';
+import PushNotificationsFacade from './PushNotificationsFacade';
+import {APP_VERSION, BUNDLE_ID} from './Config';
 
 
 class MessagesScreen extends React.Component {
@@ -14,14 +18,18 @@ class MessagesScreen extends React.Component {
 
     render() {
         return (
-            <FlatList
-                style={styles.container}
-                data={this.props.messages.allMessages.edges}
-                renderItem={this._renderItem}
-                ItemSeparatorComponent={MessagesScreen._renderSeparator}
-                keyExtractor={MessagesScreen._keyExtractor}
-                onRefresh={this._onRefresh}
-                refreshing={this.state.refreshing}/>
+            <View style={styles.container}>
+                <FlatList
+                    style={styles.messageFlatList}
+                    data={this.props.messages.allMessages.edges}
+                    renderItem={this._renderItem}
+                    ItemSeparatorComponent={MessagesScreen._renderSeparator}
+                    keyExtractor={MessagesScreen._keyExtractor}
+                    onRefresh={this._onRefreshPull}
+                    refreshing={this.state.refreshing}/>
+                <UserAgentExtractor
+                    onUserAgent={this._initGA}/>
+            </View>
         );
     }
 
@@ -33,11 +41,47 @@ class MessagesScreen extends React.Component {
         AppState.removeEventListener('change', this._onAppStateActive);
     }
 
+    _initGA = async (userAgent) => {
+        try {
+            logTrace(userAgent);
+            const pn = PushNotificationsFacade;
+
+            const expoToken = await pn.getExpoToken();
+            logTrace(expoToken);
+
+            GAFacade.init({
+                userAgent: userAgent,
+                clientId: expoToken || 'unregistered',
+                appVersion: APP_VERSION,
+                bundleId: BUNDLE_ID,
+            });
+
+            if (!expoToken) {
+                wakeMeUp('push notifications', 'expo token is empty');
+                return;
+            }
+
+            pn.registerExpoToken(expoToken);
+
+            const granted = await pn.askPermissions();
+            if (!granted) {
+                logCodeEvent('push notifications', 'permissions not granted');
+            }
+        } catch (error) {
+            wakeMeUp('push notifications', 'unexpected error', error);
+        }
+    };
+
     _onAppStateActive = (state) => {
         if (state === 'active') {
-            logEvent('root', 'app opened');
+            logAction('root', 'app opened');
             this._onRefresh();
         }
+    };
+
+    _onRefreshPull = () => {
+        logAction('message list', 'pull to refresh');
+        this._onRefresh();
     };
 
     _onRefresh = () => {
@@ -54,7 +98,7 @@ class MessagesScreen extends React.Component {
         if (error) {
             wakeMeUp('message list', 'refresh failed', error);
         } else {
-            logEvent('message list', 'refresh');
+            logCodeEvent('message list', 'refresh successfully');
         }
         this.setState({refreshing: false});
     };
@@ -66,7 +110,7 @@ class MessagesScreen extends React.Component {
     };
 
     _onPressItem = (id: string) => {
-        logEvent('message list', 'select message', id);
+        logAction('message list', 'select message', id);
         this.props.navigation.navigate('Message', this._findMessage(id));
     };
 
@@ -120,7 +164,11 @@ export default createRefetchContainer(MessagesScreen,
 
 const styles = StyleSheet.create({
     container: {
+        height: '100%',
+    },
+    messageFlatList: {
         backgroundColor: 'white',
+        height: '100%',
     },
     separator: {
         height: StyleSheet.hairlineWidth,
